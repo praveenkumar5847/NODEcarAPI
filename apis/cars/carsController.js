@@ -15,6 +15,18 @@ let carService=require("./carsService")
         })
     }
 }
+   let search = async (req, res) => {
+     try {
+       let search = await carService.search(req, res);
+       res.status(200).send(search);
+     } catch (error) {
+       console.log(error);
+       res.send({
+         status: 500,
+         msg: "internal server error",
+       });
+     }
+   };
 
    let getCar = async (req, res) => {
      try {
@@ -55,4 +67,17 @@ let updateCar = async (req, res) => {
   }
 };
 
-module.exports={getAll,createCar,updateCar,getCar}
+let deleteCar = async (req, res) => {
+  try {
+    let deleteCar = await carService.deleteCar(req);
+    res.status(200).send(deleteCar);
+  } catch (error) {
+    console.log(error);
+    res.send({
+      status: 500,
+      msg: "internal server error",
+    });
+  }
+};
+
+module.exports={getAll,createCar,updateCar,getCar,deleteCar,search}
