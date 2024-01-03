@@ -1,7 +1,8 @@
 const express=require("express")
 const client = require("mongoose")
 let bodyParser=require("body-parser")
-let route =require("./Routes")
+let route = require("./Routes")
+let cors=require("cors")
 
 
 let app = express()
@@ -30,7 +31,7 @@ app.get("/", (req,res) => {
         
     }
 })
-
+app.use(cors())
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
